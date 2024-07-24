@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    justify-items: center;
+    align-items: center;
+}
+
+body {
+    background-color: hsl(300, 32%, 8%);
+}
+
+.to-do-list {
+    font-family: "Courier New", Courier, monospace;
+    text-align: center;
+    margin-top: 100px;
+    border: 2px hsl(333, 85%, 10%) ridge;
+    background-color: hsl(0, 0%, 69%);
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-bottom: 50px;
+}
+
+h1 {
+    color: hsl(281, 61%, 25%);
+    font-size: 4rem;
+}
+
+input {
+    padding-top: 0.9rem;
+    padding-bottom: 0.6rem;
+    margin: 1.5rem 0;
+    font-size: 1.2rem;
+    background-color: hsl(0, 0%, 69%);
+    border: none;
+}
+
+button {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 90%);
+    border: none;
+    border-radius: 3%;
+    padding: 10px 15px;
+    margin: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-btn {
+    background-color: hsl(120, 79%, 45%);
+}
+
+.add-btn:hover {
+    background-color: hsl(120, 71%, 35%);
+}
+
+.delete-btn {
+    background-color: hsl(0, 79%, 45%);
+}
+
+.delete-btn:hover {
+    background-color: hsl(0, 71%, 35%);
+}
+
+.move-btn {
+    background-color: hsl(210, 79%, 45%);
+}
+
+.move-btn:hover {
+    background-color: hsl(210, 79%, 35%);
+}
+
+.text {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.text-container {
+    overflow: auto;
+    margin-right: 1rem;
+}
+
+.btns-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+li {
+    padding: 15px;
+    border: 2px solid rgb(0, 0, 0);
+    margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
