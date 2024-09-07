@@ -1,4 +1,7 @@
 import { useState } from "react";
+// import { nanoid } from "nanoid"
+import "axios";
+import axios from "axios";
 
 const ToDoList = () => {
     const [tasks, setTasks] = useState(["Your tasks will show up here"]);
@@ -10,18 +13,39 @@ const ToDoList = () => {
 
     const addTask = async () => {
         if (newTask.trim() !== "") {
+            // let savedTasks = [...tasks, newTask];
+
+            await axios
+                .post("http://localhost:3001/", { item: newTask })
+                .then((result) => console.log(result))
+                .catch((err) => console.log(err));
+
             setTasks([...tasks, newTask]);
             setNewTask("");
         }
     };
 
-    const deleteTask = (taskNum) => {
+    const deleteTask = async (taskNum) => {
+        let delTask;
         const newTaskList = tasks.filter((task, index) => {
             if (index !== taskNum) {
                 return task;
+            } else {
+                delTask = task
             }
         });
+
+        console.log(delTask)
         setTasks(newTaskList);
+
+        if (newTaskList.length === 0) {
+            return;
+        } else {
+            await axios
+                .delete("http://localhost:3001/", delTask)
+                .then((result) => console.log(result))
+                .catch((err) => console.log(err));
+        }
     };
 
     const moveTaskUp = (taskNum) => {
