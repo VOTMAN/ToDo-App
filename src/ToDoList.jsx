@@ -1,10 +1,14 @@
 import { useState } from "react";
-// import { nanoid } from "nanoid"
-import "axios";
 import axios from "axios";
+import { nanoid } from "nanoid";
 
 const ToDoList = () => {
-    const [tasks, setTasks] = useState(["Your tasks will show up here"]);
+    const [tasks, setTasks] = useState([
+        {
+            _id: String,
+            item: "Your tasks will show up here",
+        },
+    ]);
     const [newTask, setNewTask] = useState("");
 
     const handleInput = async (e) => {
@@ -13,39 +17,47 @@ const ToDoList = () => {
 
     const addTask = async () => {
         if (newTask.trim() !== "") {
-            // let savedTasks = [...tasks, newTask];
+            const itemID = nanoid();
+
+            setTasks([...tasks, { _id: itemID, item: newTask }]);
+            setNewTask("");
 
             await axios
-                .post("http://localhost:3001/", { item: newTask })
+                .post("http://localhost:3001/", {
+                    _id: itemID,
+                    item: newTask,
+                })
                 .then((result) => console.log(result))
                 .catch((err) => console.log(err));
-
-            setTasks([...tasks, newTask]);
-            setNewTask("");
         }
     };
 
     const deleteTask = async (taskNum) => {
         let delTask;
+
         const newTaskList = tasks.filter((task, index) => {
             if (index !== taskNum) {
                 return task;
             } else {
-                delTask = task
+                delTask = task;
             }
         });
 
-        console.log(delTask)
-        setTasks(newTaskList);
+        console.log(delTask);
 
         if (newTaskList.length === 0) {
             return;
-        } else {
-            await axios
-                .delete("http://localhost:3001/", delTask)
-                .then((result) => console.log(result))
-                .catch((err) => console.log(err));
         }
+        
+        await axios
+        .delete("http://localhost:3001/", {
+            data: { _id: delTask._id },
+        })
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
+        
+        
+        setTasks(newTaskList);
     };
 
     const moveTaskUp = (taskNum) => {
@@ -90,7 +102,7 @@ const ToDoList = () => {
                     return (
                         <li key={index}>
                             <div className="text-container">
-                                <span className="text">{task}</span>
+                                <span className="text">{task.item}</span>
                             </div>
                             <div className="btns-container">
                                 <button
