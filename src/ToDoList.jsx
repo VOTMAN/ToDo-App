@@ -48,16 +48,17 @@ const ToDoList = () => {
         if (newTaskList.length === 0) {
             return;
         }
-        
+
+        setTasks(newTaskList);
+
         await axios
         .delete("http://localhost:3001/", {
-            data: { _id: delTask._id },
+            data: { _id: delTask._id, item: delTask.item },
         })
         .then((result) => console.log(result))
         .catch((err) => console.log(err));
-        
-        
-        setTasks(newTaskList);
+
+
     };
 
     const moveTaskUp = (taskNum) => {
