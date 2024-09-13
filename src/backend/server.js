@@ -15,7 +15,10 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
 const getItems = async (req, res) => {
     const all = await itemsModel.find()
     // console.log(all)
-    res.json(all)
+    if (all.length == 0) {
+        return;
+    }
+    await res.json(all)
 }
 
 try {

@@ -4,12 +4,15 @@ import { nanoid } from "nanoid";
 
 const ToDoList = () => {
     useEffect(() => {
-        const all = axios.get("http://localhost:3001/")
-        .then((res) => {
-            console.log(res.data)
-            setTasks(res.data)
-        })
-        .catch((err) => console.log(err))
+        const get = async () => {
+            await axios.get("http://localhost:3001/")
+            .then((res) => {
+                // console.log(res.data)
+                setTasks(res.data)
+            })
+            .catch((err) => console.log(err))
+        }
+        get()
     },[])
 
     const [tasks, setTasks] = useState([
