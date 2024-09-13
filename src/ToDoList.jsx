@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { nanoid } from "nanoid";
 
 const ToDoList = () => {
+    useEffect(() => {
+        const all = axios.get("http://localhost:3001/")
+        .then((res) => {
+            console.log(res.data)
+            setTasks(res.data)
+        })
+        .catch((err) => console.log(err))
+    },[])
+
     const [tasks, setTasks] = useState([
         {
             _id: String,
