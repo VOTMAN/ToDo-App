@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(process.env.MONGO_ATLAS);
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster.rcbzija.mongodb.net/${process.env.MONGO_COLLECTION}?retryWrites=true&w=majority&appName=Cluster`);
 
 const getItems = async (req, res) => {
     const all = await itemsModel.find()
